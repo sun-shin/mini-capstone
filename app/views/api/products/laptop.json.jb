@@ -1,0 +1,5 @@
+{
+  name: @laptop.name,
+  price: @laptop.price,
+  description: @fan.description
+}

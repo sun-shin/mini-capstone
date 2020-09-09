@@ -1,0 +1,5 @@
+{
+  name: @fan.name,
+  price: @fan.price,
+  description: @fan.description
+}
