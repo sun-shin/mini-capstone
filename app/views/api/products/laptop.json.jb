@@ -2,5 +2,6 @@
   id: @laptop.id,
   name: @laptop.name,
   price: @laptop.price,
-  description: @fan.description
+  image_path: @laptop.image_path,
+  description: @laptop.description
 }
