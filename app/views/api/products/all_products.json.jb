@@ -1,7 +1,8 @@
-# @all_products. map do |product|
+@all_products. map do |product|
   {
+    id: product.id,
     name: product.name,
     price: product.price,
     description: product.description,
   }
-# end
+end
