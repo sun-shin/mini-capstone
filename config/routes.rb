@@ -5,5 +5,8 @@ Rails.application.routes.draw do
     get "/camera_path" => "products#camera_action"
     get "/fan_path" => "products#fan_action"
     get "/laptop_path" => "products#laptop_action"
+    get "/single_product_path" => "products#single_product_action"
+    get "/single_product_url_path/:id" => "products#single_product_action"
+   
   end
 end

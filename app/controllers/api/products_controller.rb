@@ -20,4 +20,11 @@ class Api::ProductsController < ApplicationController
     render "laptop.json.jb"
   end
 
+  def single_product_action
+    product_id = params[:id]
+    @message = Product.find_by(id: product_id)
+    render "single_product.json.jb"
+  end
+
+
 end
