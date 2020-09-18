@@ -1,7 +1,0 @@
-{
-  id: @laptop.id,
-  name: @laptop.name,
-  price: @laptop.price,
-  image_path: @laptop.image_path,
-  description: @laptop.description
-}

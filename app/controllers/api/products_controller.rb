@@ -1,33 +1,18 @@
 class Api::ProductsController < ApplicationController
 
-  # def all_products_action
-  #   @all_products = Product.all
-  #   render "all_products.json.jb"
-  # end
-
-  # def camera_action
-  #   @camera = Product.find_by(id:3)
-  #   render "camera.json.jb"
-  # end
-
-  # def fan_action
-  #   @fan = Product.find_by(id:2)
-  #   render "fan.json.jb"
-  # end
-
-  # def laptop_action
-  #   @laptop = Product.find_by(id:1)
-  #   render "laptop.json.jb"
-  # end
-
-  # def single_product_action
-  #   product_id = params[:id]
-  #   @message = Product.find_by(id: product_id)
-  #   render "single_product.json.jb"
-  # end
-
   def index
-    @products = Product.all
+    @products = Product.all.order(:price)
+    if params[sort] == "price" && params[sort_order] == "desc"
+      @products = @products.order(price: :desc) 
+    end
+    
+    # if params[:sort] 
+    #   @products = @products.order(:price) 
+    # end
+     
+    # if params[:search] 
+    # @products = @products.where(:name)("name iLIKE ?", "%#{params[:search]}%")
+  
     render "index.json.jb"
   end
 
@@ -41,10 +26,15 @@ class Api::ProductsController < ApplicationController
       name: params[:name],
       price: params[:price],
       image_path: params[:image_path],
-      description: params[:description]
+      description: params[:description],
+      inventory: params[:inventory]
     )
-    @product.save
-    render "show.json.jb"
+    if @product.save
+      render "show.json.jb"
+    else
+      render json: { errors: @product.errors.full_messages }, status: 422
+    end
+
   end
 
   def update
@@ -54,9 +44,13 @@ class Api::ProductsController < ApplicationController
     @product.price = params[:price] || @product.price
     @product.image_path = params[:image_path] || @product.image_path
     @product.description = params[:description] ||@product.description
+    @product.inventory = params[:inventory] || @product.inventory
 
-    @product.save
-    render "show.json.jb"
+    if @product.save
+      render "show.json.jb"
+    else
+      render json: { errors: @product.errors.full_messages }, status:422
+    end
   end
 
   def destroy

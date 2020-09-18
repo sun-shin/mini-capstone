@@ -1,7 +1,0 @@
-{
-  id: @camera.id,
-  name: @camera.name,
-  price: @camera.price,
-  image_path: @camera.image_path,
-  description: @camera.description
-}

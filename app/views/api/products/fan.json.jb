@@ -1,6 +1,0 @@
-{
-  id: @fan.id,
-  name: @fan.name,
-  price: @fan.price,image_path: @fan.image_path,
-  description: @fan.description
-}
