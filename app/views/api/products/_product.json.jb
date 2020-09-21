@@ -2,8 +2,8 @@
   id: product.id,
   name: product.name,
   price: product.price,
-  image_path: product.image_path,
   description: product.description,
+  images: product.images,
   formatted: {
     is_discounted: product.is_discounted?,
     price: number_to_currency(product.price),
