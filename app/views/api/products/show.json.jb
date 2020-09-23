@@ -1,15 +1,5 @@
-{
-  id: @product.id,
-  name: @product.name,
-  price: @product.price,
-  images: ,
-  description: @product.description,
-  # supplier_name: @product
-  inventory: @product.inventory,
-  formatted: {
-    discount: @product.is_discounted?,
-    tax: @product.tax,
-    total: @product.total
-  }
-}
+render partial: "product.json.jb", locals: { product: @product }
 
+# id: @user.id,
+# name: @user.name,
+# email: @user.email

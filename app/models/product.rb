@@ -5,8 +5,22 @@ class Product < ApplicationRecord
   validates :price,numericality: { greater_than: 0 }
   validates :inventory, numericality: { greater_than: 0 }
 
+  belongs_to :supplier
   has_many :images
+  has_many :orders
 
+  scope :title_search, -> (search_term) { where("name iLIKE ?", "%#{search_term}%") }
+  scope :discounted, ->(check_discount) { where("price < ?", 10) if check_discount }
+  scope :sorted, ->(sort, sort_order) {
+    if sort == "price" && sort_order == "asc"
+      order(price: :asc)
+    elsif sort == "price" && sort_order == "desc"
+      order(price: :desc)
+    else
+      order(id: :asc)
+    end
+  }
+  
   def supplier 
     @supplier = Supplier.find_by(id: supplier_id)
   end

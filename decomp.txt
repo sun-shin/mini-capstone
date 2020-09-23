@@ -1,0 +1,7 @@
+Write out all the steps necessary for your mini-capstone backend to allow users to purchase products.
+
+1.) create new model for orders with attributes product_id, quantity, user_id, price (sub-total & total)
+2.) create associations between models
+  -
+3.) require users to be 'logged-in' to add items. In backend you would create conditional for user to have authorization with jwt token in header to be able to access create action for orders.
+4.) 
