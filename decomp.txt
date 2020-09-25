@@ -1,7 +1,13 @@
-Write out all the steps necessary for your mini-capstone backend to allow users to purchase products.
+Write out all the steps necessary for your mini-capstone backend to allow users to purchase multiple products with a shopping cart. (aim for roughly 10 to 15 steps)
 
-1.) create new model for orders with attributes product_id, quantity, user_id, price (sub-total & total)
-2.) create associations between models
-  -
-3.) require users to be 'logged-in' to add items. In backend you would create conditional for user to have authorization with jwt token in header to be able to access create action for orders.
-4.) 
+*Testing after each step*
+1.) create model for carted_products 
+  -  in carted_product model include attr product_id, user_id, quantity, order_id, status
+2.) remove product_id & quantity attribute from orders model
+3.) Update/create associations to include carted_products
+4.) Create carted_products route/controller
+5.) controller actions for carted_products: create, update, index (all history of carted_product vs. all carted_product for current order) (w/login)
+
+need:
+ - Data
+ - 
