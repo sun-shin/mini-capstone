@@ -6,12 +6,14 @@ class Product < ApplicationRecord
   validates :inventory, numericality: { greater_than: 0 }
 
   belongs_to :supplier
+
   has_many :images
-  # has_many :orders (removed product_ud from orders)
   has_many :product_categories
-  has_many :carted_products
-  
   has_many :categories, through: :product_categories
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+  
+
 
   # scope :title_search, -> (search_term) { where("name iLIKE ?", "%#{search_term}%") }
   # scope :discounted, ->(check_discount) { where("price < ?", 10) if check_discount }

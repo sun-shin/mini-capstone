@@ -8,7 +8,6 @@ class Api::CartedProductsController < ApplicationController
       product_id: params[:product_id],
       quantity: params[:quantity],
       status: "carted"
-      # make default "carted" in model
     )
 
     if @carted_product.save
@@ -22,5 +21,12 @@ class Api::CartedProductsController < ApplicationController
   def index
     @carted_products = current_user.carted_products.where(status: "carted")
     render "index.json.jb"
+  end
+
+  def destroy
+    carted_product = current_user.carted_products.find(params[:id])
+    carted_product.status = "removed"
+    carted_product.save
+    render json: { status: "Carted product removed!" }
   end
 end

@@ -3,22 +3,28 @@ class Api::OrdersController < ApplicationController
   before_action :authenticate_user
 
   def create
-    # product = Product.find_by(id: params[:product_id])
-    # subtotal = prams[:quantity].to_i # product.price
+    
+    carted_products = current_user.carted_products.where(status: "carted")
+
+    calculated_subtotal = 0
+    carted_products.each do |carted_product|
+      calculated_subtotal += carted_product.product.price * carted_product.quantity
+    end
+
     @order = Order.new(
       user_id: current_user.id,
-      product_id: params[:product_id],
-      quantity: params[:quantity]
-    
+      subtotal: calculated_subtotal,
+      tax: calculated_tax,
+      total: calculated_total
     )
-    @order.subtotal = @order.quantity * @order.product.price
-    @order.tax = @order.subtotal * 0.09
-    @order.total = @order.tax + @order.subtotal
+  
     if @order.save
+      # update carted products status and order_id
+      carted_products.update_all(status: "purchased", order_id: @order.id)
       render "show.json.jb"
     else
-      render json: { errors: @order.errors.full_messages }, status: 422
-    end 
+      render json: { errors: @order.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def index

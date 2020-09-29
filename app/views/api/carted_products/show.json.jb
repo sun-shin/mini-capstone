@@ -1,8 +1,1 @@
-{
-  id: @carted_product.id,
-  user_id: @carted_product.user_id,
-  product_id: @carted_product.product_id,
-  quantity: @carted_product.quantity,
-  order_id: @carted_product.order_id,
-  status: @carted_product.status
-}
+render partial: "carted_product.json.jb", locals: { carted_product: @carted_product }
