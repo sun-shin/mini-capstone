@@ -11,6 +11,9 @@ class Api::OrdersController < ApplicationController
       calculated_subtotal += carted_product.product.price * carted_product.quantity
     end
 
+    calculated_tax = calculated_subtotal * 0.09
+    calculated_total = calculated_subtotal + calculated_tax
+
     @order = Order.new(
       user_id: current_user.id,
       subtotal: calculated_subtotal,
